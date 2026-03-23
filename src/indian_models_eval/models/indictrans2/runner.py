@@ -91,6 +91,20 @@ def translate(
         raise ValueError(f"Target language '{tgt_lang}' not found in IndicTrans2 vocab. "
                          f"Valid tags: {sorted(k for k in tokenizer.src_encoder if '_' in k and any(c.isupper() for c in k))}")
 
+    # Pre-process: for Indic→En, IndicTrans2 expects Devanagari-unified input.
+    # Transliterate non-Devanagari source scripts → Devanagari before tokenization.
+    indicnlp_src_lang = _FLORES_TO_INDICNLP.get(src_lang)
+    if indicnlp_src_lang:
+        try:
+            from indicnlp.transliterate.unicode_transliterate import UnicodeIndicTransliterator
+            sentences = [
+                UnicodeIndicTransliterator.transliterate(s, indicnlp_src_lang, "hi")
+                for s in sentences
+            ]
+            logger.info("Pre-transliterated %d sentences: %s (%s) → Devanagari", len(sentences), src_lang, indicnlp_src_lang)
+        except Exception as e:
+            logger.warning("IndicNLP pre-transliteration failed for %s: %s — using raw input", src_lang, e)
+
     # Prefix each sentence with src_lang and tgt_lang tags as the tokenizer expects
     prefixed = [f"{src_lang} {tgt_lang} {s}" for s in sentences]
 
