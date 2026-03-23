@@ -38,7 +38,16 @@ class ModelEntry:
 
     @property
     def claimed_pairs(self) -> list[LangPair]:
-        """All (src, tgt) pairs this model claims to support."""
+        """All (src, tgt) pairs this model claims to support.
+
+        If the registry entry has an explicit `pairs` list (for models that don't
+        support all src×tgt combinations), use that directly. Otherwise fall back
+        to the cartesian product of src × tgt (excluding self-pairs).
+        """
+        explicit: list | None = self.claimed_languages.get("pairs")
+        if explicit is not None:
+            return [LangPair(src=p[0], tgt=p[1]) for p in explicit]
+
         src_langs: list[str] = self.claimed_languages.get("src", [])
         tgt_langs: list[str] = self.claimed_languages.get("tgt", [])
         pairs = []

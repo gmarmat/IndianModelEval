@@ -141,8 +141,26 @@ models:
     license: Krutrim-Community-v1.0
     direction: bidirectional
     claimed_languages:
-      src: [eng_Latn, ben_Beng, hin_Deva, kan_Knda, mar_Deva, mal_Mlym, guj_Gujr, pan_Guru, tel_Telu, tam_Taml]
-      tgt: [eng_Latn, ben_Beng, hin_Deva, kan_Knda, mar_Deva, mal_Mlym, guj_Gujr, pan_Guru, tel_Telu, tam_Taml]
+      # Krutrim only supports English↔Indic — no Indic→Indic. Use explicit pairs.
+      pairs:
+        - [eng_Latn, ben_Beng]
+        - [eng_Latn, hin_Deva]
+        - [eng_Latn, kan_Knda]
+        - [eng_Latn, mar_Deva]
+        - [eng_Latn, mal_Mlym]
+        - [eng_Latn, guj_Gujr]
+        - [eng_Latn, pan_Guru]
+        - [eng_Latn, tel_Telu]
+        - [eng_Latn, tam_Taml]
+        - [ben_Beng, eng_Latn]
+        - [hin_Deva, eng_Latn]
+        - [kan_Knda, eng_Latn]
+        - [mar_Deva, eng_Latn]
+        - [mal_Mlym, eng_Latn]
+        - [guj_Gujr, eng_Latn]
+        - [pan_Guru, eng_Latn]
+        - [tel_Telu, eng_Latn]
+        - [tam_Taml, eng_Latn]
     eval_config:
       batch_size: 32
       beam_len: 3
