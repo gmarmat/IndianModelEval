@@ -1,0 +1,471 @@
+{
+  "schema_version": "1.0",
+  "harness_version": "2026.03.18.01",
+  "timestamp": "20260323T205103Z",
+  "model": {
+    "id": "krutrim-translate",
+    "display_name": "Krutrim Translate",
+    "hf_id": "krutrim-ai-labs/KrutrimTranslate",
+    "license": "Krutrim-Community-v1.0",
+    "revision_hash": null
+  },
+  "eval_config": {
+    "datasets": [
+      "flores200"
+    ],
+    "seed": 42,
+    "batch_size": 64,
+    "precision": "fp16",
+    "max_new_tokens": 256,
+    "dry_run": false,
+    "viability_threshold_chrf": 40.0
+  },
+  "reproducibility": {
+    "harness_git_hash": "b5c224520900d60b856fb208af4a8d111cf0697d",
+    "model_revision_hash": null,
+    "seed": 42
+  },
+  "hardware": {},
+  "aggregate": {
+    "n_pairs": 18,
+    "viable_pairs": 18,
+    "chrf_mean": 58.19,
+    "chrf_min": 50.08,
+    "chrf_max": 65.12,
+    "bleu_mean": 40.05,
+    "comet_mean": 0.8676,
+    "comet_mean_reliable_only": 0.8676,
+    "note": "Aggregate scores hide per-language variance. See per_language_pair for full breakdown."
+  },
+  "claims_verification": {
+    "model_id": "krutrim-translate",
+    "model_display_name": "Krutrim Translate",
+    "claimed_pairs": 18,
+    "tested_pairs": 18,
+    "viable_pairs": 18,
+    "failed_pairs": [],
+    "viability_rate": 1.0,
+    "viability_threshold_chrf": 40.0,
+    "verdict": "claims_verified"
+  },
+  "per_language_pair": [
+    {
+      "src_lang": "eng_Latn",
+      "tgt_lang": "ben_Beng",
+      "src_lang_name": "English",
+      "tgt_lang_name": "Bengali",
+      "dataset": "flores200",
+      "chrf": 51.54,
+      "bleu": 37.2,
+      "comet": 0.8666,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    },
+    {
+      "src_lang": "eng_Latn",
+      "tgt_lang": "hin_Deva",
+      "src_lang_name": "English",
+      "tgt_lang_name": "Hindi",
+      "dataset": "flores200",
+      "chrf": 58.74,
+      "bleu": 41.8,
+      "comet": 0.808,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    },
+    {
+      "src_lang": "eng_Latn",
+      "tgt_lang": "kan_Knda",
+      "src_lang_name": "English",
+      "tgt_lang_name": "Kannada",
+      "dataset": "flores200",
+      "chrf": 53.43,
+      "bleu": 38.53,
+      "comet": 0.8632,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    },
+    {
+      "src_lang": "eng_Latn",
+      "tgt_lang": "mar_Deva",
+      "src_lang_name": "English",
+      "tgt_lang_name": "Marathi",
+      "dataset": "flores200",
+      "chrf": 50.08,
+      "bleu": 31.2,
+      "comet": 0.7533,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    },
+    {
+      "src_lang": "eng_Latn",
+      "tgt_lang": "mal_Mlym",
+      "src_lang_name": "English",
+      "tgt_lang_name": "Malayalam",
+      "dataset": "flores200",
+      "chrf": 54.59,
+      "bleu": 40.67,
+      "comet": 0.8861,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    },
+    {
+      "src_lang": "eng_Latn",
+      "tgt_lang": "guj_Gujr",
+      "src_lang_name": "English",
+      "tgt_lang_name": "Gujarati",
+      "dataset": "flores200",
+      "chrf": 54.29,
+      "bleu": 38.24,
+      "comet": 0.8849,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    },
+    {
+      "src_lang": "eng_Latn",
+      "tgt_lang": "pan_Guru",
+      "src_lang_name": "English",
+      "tgt_lang_name": "Punjabi",
+      "dataset": "flores200",
+      "chrf": 52.51,
+      "bleu": 39.67,
+      "comet": 0.8459,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    },
+    {
+      "src_lang": "eng_Latn",
+      "tgt_lang": "tel_Telu",
+      "src_lang_name": "English",
+      "tgt_lang_name": "Telugu",
+      "dataset": "flores200",
+      "chrf": 56.74,
+      "bleu": 41.21,
+      "comet": 0.8707,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    },
+    {
+      "src_lang": "eng_Latn",
+      "tgt_lang": "tam_Taml",
+      "src_lang_name": "English",
+      "tgt_lang_name": "Tamil",
+      "dataset": "flores200",
+      "chrf": 56.9,
+      "bleu": 39.72,
+      "comet": 0.8922,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    },
+    {
+      "src_lang": "ben_Beng",
+      "tgt_lang": "eng_Latn",
+      "src_lang_name": "Bengali",
+      "tgt_lang_name": "English",
+      "dataset": "flores200",
+      "chrf": 60.68,
+      "bleu": 39.48,
+      "comet": 0.8818,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    },
+    {
+      "src_lang": "hin_Deva",
+      "tgt_lang": "eng_Latn",
+      "src_lang_name": "Hindi",
+      "tgt_lang_name": "English",
+      "dataset": "flores200",
+      "chrf": 64.83,
+      "bleu": 45.07,
+      "comet": 0.8932,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    },
+    {
+      "src_lang": "kan_Knda",
+      "tgt_lang": "eng_Latn",
+      "src_lang_name": "Kannada",
+      "tgt_lang_name": "English",
+      "dataset": "flores200",
+      "chrf": 59.82,
+      "bleu": 38.81,
+      "comet": 0.878,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    },
+    {
+      "src_lang": "mar_Deva",
+      "tgt_lang": "eng_Latn",
+      "src_lang_name": "Marathi",
+      "tgt_lang_name": "English",
+      "dataset": "flores200",
+      "chrf": 61.26,
+      "bleu": 40.16,
+      "comet": 0.8778,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    },
+    {
+      "src_lang": "mal_Mlym",
+      "tgt_lang": "eng_Latn",
+      "src_lang_name": "Malayalam",
+      "tgt_lang_name": "English",
+      "dataset": "flores200",
+      "chrf": 61.18,
+      "bleu": 40.04,
+      "comet": 0.8844,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    },
+    {
+      "src_lang": "guj_Gujr",
+      "tgt_lang": "eng_Latn",
+      "src_lang_name": "Gujarati",
+      "tgt_lang_name": "English",
+      "dataset": "flores200",
+      "chrf": 63.32,
+      "bleu": 42.48,
+      "comet": 0.8964,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    },
+    {
+      "src_lang": "pan_Guru",
+      "tgt_lang": "eng_Latn",
+      "src_lang_name": "Punjabi",
+      "tgt_lang_name": "English",
+      "dataset": "flores200",
+      "chrf": 65.12,
+      "bleu": 45.13,
+      "comet": 0.8861,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    },
+    {
+      "src_lang": "tel_Telu",
+      "tgt_lang": "eng_Latn",
+      "src_lang_name": "Telugu",
+      "tgt_lang_name": "English",
+      "dataset": "flores200",
+      "chrf": 63.96,
+      "bleu": 44.47,
+      "comet": 0.8824,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    },
+    {
+      "src_lang": "tam_Taml",
+      "tgt_lang": "eng_Latn",
+      "src_lang_name": "Tamil",
+      "tgt_lang_name": "English",
+      "dataset": "flores200",
+      "chrf": 58.51,
+      "bleu": 37.05,
+      "comet": 0.8655,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 997
+    }
+  ],
+  "latency": {
+    "per_pair": [
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "ben_Beng",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 5.26,
+        "sentences_per_second": 0.0,
+        "n_sentences": 997
+      },
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "hin_Deva",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 2.89,
+        "sentences_per_second": 0.0,
+        "n_sentences": 997
+      },
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "kan_Knda",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 2.85,
+        "sentences_per_second": 0.0,
+        "n_sentences": 997
+      },
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "mar_Deva",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 2.81,
+        "sentences_per_second": 0.0,
+        "n_sentences": 997
+      },
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "mal_Mlym",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 3.28,
+        "sentences_per_second": 0.0,
+        "n_sentences": 997
+      },
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "guj_Gujr",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 2.8,
+        "sentences_per_second": 0.0,
+        "n_sentences": 997
+      },
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "pan_Guru",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 3.83,
+        "sentences_per_second": 0.0,
+        "n_sentences": 997
+      },
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "tel_Telu",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 2.8,
+        "sentences_per_second": 0.0,
+        "n_sentences": 997
+      },
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "tam_Taml",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 2.96,
+        "sentences_per_second": 0.0,
+        "n_sentences": 997
+      },
+      {
+        "src_lang": "ben_Beng",
+        "tgt_lang": "eng_Latn",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 4.17,
+        "sentences_per_second": 0.0,
+        "n_sentences": 997
+      },
+      {
+        "src_lang": "hin_Deva",
+        "tgt_lang": "eng_Latn",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 4.81,
+        "sentences_per_second": 207.4,
+        "n_sentences": 997
+      },
+      {
+        "src_lang": "kan_Knda",
+        "tgt_lang": "eng_Latn",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 2.1,
+        "sentences_per_second": 475.17,
+        "n_sentences": 997
+      },
+      {
+        "src_lang": "mar_Deva",
+        "tgt_lang": "eng_Latn",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 2.0,
+        "sentences_per_second": 499.6,
+        "n_sentences": 997
+      },
+      {
+        "src_lang": "mal_Mlym",
+        "tgt_lang": "eng_Latn",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 2.25,
+        "sentences_per_second": 442.84,
+        "n_sentences": 997
+      },
+      {
+        "src_lang": "guj_Gujr",
+        "tgt_lang": "eng_Latn",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 2.1,
+        "sentences_per_second": 474.74,
+        "n_sentences": 997
+      },
+      {
+        "src_lang": "pan_Guru",
+        "tgt_lang": "eng_Latn",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 2.1,
+        "sentences_per_second": 474.27,
+        "n_sentences": 997
+      },
+      {
+        "src_lang": "tel_Telu",
+        "tgt_lang": "eng_Latn",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 2.16,
+        "sentences_per_second": 461.02,
+        "n_sentences": 997
+      },
+      {
+        "src_lang": "tam_Taml",
+        "tgt_lang": "eng_Latn",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 1.96,
+        "sentences_per_second": 509.22,
+        "n_sentences": 997
+      }
+    ]
+  }
+}
