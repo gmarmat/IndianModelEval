@@ -1,0 +1,121 @@
+# [Project Name] — Architecture
+
+**Version:** 0.1 | **Updated:** YYYY-MM-DD
+
+> **LLM Instructions:** This file is token-optimized for fast context-building.
+> - Read top-to-bottom until you have enough context
+> - Each section is self-contained — no forward references needed
+> - Tables over prose, grep-friendly headings, no filler text
+> - Detailed docs live in `docs/features/*.md` — this file is the index, not the encyclopedia
+> - Target: under 300 lines. If a section grows past ~20 lines, extract to a feature doc and link
+
+---
+
+## Quick Reference
+
+### What Is This?
+
+<!-- 1 paragraph: what the project does, who it's for, the key insight or unique aspect -->
+
+### Tech Stack
+
+| Component | Technology | Notes |
+|-----------|------------|-------|
+| Framework | | |
+| Language | | |
+| Database | | |
+| Auth | | |
+| Hosting | | |
+| UI Components | | |
+| CSS | | |
+| Charts | | (if applicable) |
+
+### Project Structure
+
+<!-- Keep to ~30 lines. Only show the important directories and files. -->
+```
+app/                        # or src/
+├── ...
+docs/
+├── arch.md                 # This file
+├── PRD.md                  # Product requirements
+├── features/               # Detailed feature docs
+│   ├── feature-1.md
+│   └── ...
+├── plans/                  # Research & decision docs
+│   └── YYYY-MM-DD-topic.md
+.claude/
+├── commands/advise.md      # /advise skill
+├── skills/                 # /startnow, /updatenow, /l3
+CLAUDE.md                   # Project rules
+```
+
+### Environment Variables
+
+<!-- List env var NAMES only — NEVER include values -->
+```
+# Required
+DATABASE_URL=
+AUTH_SECRET=
+
+# Optional
+# FEATURE_FLAG=
+```
+
+---
+
+## Domain Concepts
+
+<!-- Key business terms and relationships. Keep brief — 1-2 sentences each.
+     Link to feature docs for detailed explanations. -->
+
+| Concept | Description |
+|---------|-------------|
+| | |
+
+---
+
+## Data Model
+
+<!-- Tables/collections with key columns. Group by domain if >5 tables.
+     Link to feature docs for full schemas and relationships. -->
+
+| Table | Key Columns | Purpose |
+|-------|-------------|---------|
+| | | |
+
+---
+
+## API Routes
+
+<!-- Endpoint table grouped by domain. -->
+
+| Method | Path | Purpose |
+|--------|------|---------|
+| | | |
+
+---
+
+## Key Patterns
+
+<!-- Numbered list of architectural conventions. Add as they emerge. -->
+
+1. **[Pattern name]** — [1-sentence description]
+
+---
+
+## Feature Index
+
+<!-- Links to detailed feature docs. Update status as features progress. -->
+
+| # | Feature | Doc | Status |
+|---|---------|-----|--------|
+| 1 | | [docs/features/feature-1.md](./features/feature-1.md) | planned |
+
+---
+
+## Version History
+
+| Ver | Date | Changes |
+|-----|------|---------|
+| 0.1 | YYYY-MM-DD | **Initial scaffold.** Architecture from PRD. |

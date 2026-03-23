@@ -1,0 +1,239 @@
+# [Product Name] — Product Requirements Document
+
+**Version:** 0.1 | **Updated:** YYYY-MM-DD | **Status:** Draft
+
+<!--
+  HOW TO USE THIS TEMPLATE:
+  1. Start with a rough idea — fill in Executive Summary and Problem Statement
+  2. Iterate with an LLM to refine sections (use /advise for research)
+  3. Once solid, run a Critical Assessment (see appendix) to find gaps
+  4. Break into phases/sprints with acceptance criteria
+  5. Hand off to arch.md for implementation tracking
+
+  CUSTOMIZE markers show what to replace. Delete them after filling in.
+-->
+
+---
+
+## LLM Quick Start
+
+<!-- CUSTOMIZE: 3-5 bullet summary for fast context loading. An LLM reading this should understand the product in 10 seconds. -->
+
+- **What:** [1-sentence product definition]
+- **Who:** [Target users]
+- **Stack:** [Key technologies]
+- **Key constraint:** [The #1 thing that shapes every decision]
+- **Data strategy:** [Where data comes from, how it flows]
+
+---
+
+## Executive Summary
+
+<!-- CUSTOMIZE: 1 paragraph — what this product does, why it matters, what makes it unique. -->
+
+### Value Proposition
+
+| Stakeholder | Value |
+|-------------|-------|
+<!-- CUSTOMIZE: Who benefits and how. 2-5 rows. -->
+| | |
+
+### Success Metrics
+
+| Metric | Target | Measurement |
+|--------|--------|-------------|
+<!-- CUSTOMIZE: How you'll know this product is working. 3-6 KPIs. -->
+| | | |
+
+---
+
+## Problem Statement
+
+### Current State
+<!-- CUSTOMIZE: What exists today. 2-3 sentences. -->
+
+### Pain Points
+
+| # | Pain Point | Who Feels It | Severity |
+|---|-----------|-------------|----------|
+<!-- CUSTOMIZE: 3-7 specific problems this product solves. -->
+| 1 | | | High/Med/Low |
+
+### Desired State
+<!-- CUSTOMIZE: What the world looks like after this product exists. 2-3 sentences. -->
+
+---
+
+## Target Users & Roles
+
+<!-- CUSTOMIZE: Who uses this product and what they can do. -->
+
+| Role | Description | Key Permissions |
+|------|-------------|----------------|
+| | | |
+
+### Access Model
+<!-- CUSTOMIZE: How users get access (invite codes, SSO, public signup, etc.) -->
+
+---
+
+## Boundaries
+
+<!-- CUSTOMIZE: Critical guardrails. These prevent scope creep and protect production systems. -->
+
+| Category | Rule |
+|----------|------|
+| **ALWAYS** | [Things that must be true in every implementation decision] |
+| **ASK FIRST** | [Things that require explicit user/stakeholder approval before doing] |
+| **NEVER** | [Hard prohibitions — things that would cause real damage if violated] |
+
+---
+
+## Core Concepts
+
+<!-- CUSTOMIZE: Key domain terms and relationships. These are the building blocks everything else depends on.
+     For each concept: what it is, why it matters, how it connects to other concepts.
+     Use tables and diagrams, not paragraphs. -->
+
+| Concept | Definition | Relates To |
+|---------|-----------|------------|
+| | | |
+
+---
+
+## Core Features
+
+<!-- CUSTOMIZE: Organize by phase/sprint. Each feature needs acceptance criteria so it's testable. -->
+
+### Phase 1 — MVP
+
+**Goal:** [What Phase 1 delivers in 1 sentence]
+**Timeline:** [Estimated duration]
+
+| # | Feature | Acceptance Criteria | Priority |
+|---|---------|-------------------|----------|
+| 1.1 | | | P0/P1/P2 |
+
+### Phase 2 — [Name]
+
+**Goal:** [What Phase 2 adds]
+**Timeline:** [Estimated duration]
+**Depends on:** Phase 1 complete
+
+| # | Feature | Acceptance Criteria | Priority |
+|---|---------|-------------------|----------|
+| 2.1 | | | P0/P1/P2 |
+
+<!-- CUSTOMIZE: Add Phase 3, 4 as needed. Keep later phases high-level — they'll be refined when Phase 1 is done. -->
+
+---
+
+## Non-Functional Requirements
+
+| Category | Requirement | Target |
+|----------|-------------|--------|
+| **Performance** | | |
+| **Scalability** | | |
+| **Availability** | | |
+| **Security** | | |
+| **Compliance** | | |
+
+---
+
+## Data Sources & Integrations
+
+<!-- CUSTOMIZE: Where data comes from, external APIs, third-party services. -->
+
+| Source | Type | Purpose | Auth | Rate Limits |
+|--------|------|---------|------|-------------|
+| | API/CSV/DB/Manual | | | |
+
+### Data Flow
+<!-- CUSTOMIZE: How data moves through the system. Use a simple diagram or ordered list. -->
+
+---
+
+## Cost Model
+
+<!-- CUSTOMIZE: What this will cost to build and run. Be honest about ongoing costs. -->
+
+| Category | Cost | Notes |
+|----------|------|-------|
+| **Infrastructure** | | |
+| **Third-party APIs** | | |
+| **Services** | | |
+| **Total (monthly)** | | |
+
+### Free Tier Limits
+<!-- CUSTOMIZE: If using free tiers, document when you'll outgrow them. -->
+
+---
+
+## Out of Scope
+
+<!-- CUSTOMIZE: Explicitly list what this product does NOT do. Prevents scope creep. -->
+
+| Feature | Why Not Now | Target Version |
+|---------|-----------|----------------|
+| | | v2 / v3 / Never |
+
+---
+
+## Open Questions
+
+<!-- CUSTOMIZE: Unresolved decisions. These MUST be answered before the relevant phase starts.
+     Keep this section alive — add questions as they come up, mark resolved ones. -->
+
+| # | Question | Impact | Status | Resolution |
+|---|----------|--------|--------|------------|
+| 1 | | Blocks Phase [N] | Open / Resolved | |
+
+---
+
+## Dependencies
+
+<!-- CUSTOMIZE: External things that could block progress. -->
+
+| Dependency | Owner | Risk | Mitigation |
+|-----------|-------|------|------------|
+| | | High/Med/Low | |
+
+---
+
+## Technical References
+
+<!-- CUSTOMIZE: Links to companion docs. These get created as the project progresses. -->
+
+| Doc | Purpose | Status |
+|-----|---------|--------|
+| `docs/arch.md` | Architecture index — implementation source of truth | Created at scaffold |
+| `docs/features/*.md` | Detailed feature specs | Created per feature |
+| `docs/plans/*.md` | Research, decisions, assessments | Created as needed |
+
+---
+
+## Revision History
+
+| Ver | Date | Changes |
+|-----|------|---------|
+| 0.1 | YYYY-MM-DD | **Initial draft.** [What's covered] |
+
+---
+
+## Appendix: Critical Assessment Checklist
+
+<!-- Run this against your PRD before starting implementation. Use /advise or do manually.
+     Save results to: docs/plans/YYYY-MM-DD-prd-critical-assessment.md -->
+
+**Ask these questions:**
+
+| # | Check | What to Look For |
+|---|-------|-----------------|
+| 1 | **Consistency** | Do all docs (PRD, arch, SPEC) agree on terminology, data models, roles? |
+| 2 | **Feasibility** | Can every feature be built with the stated stack within the stated timeline? |
+| 3 | **Security** | Are there auth gaps, exposed data, missing RLS, credential risks? |
+| 4 | **Cost reality** | Will free tiers last? Are API costs estimated correctly? |
+| 5 | **Scale** | What breaks at 10x users? 100x data? |
+| 6 | **Open questions** | Are any blocking questions unresolved for Phase 1? |
+| 7 | **Boundaries** | Are ALWAYS/ASK/NEVER rules specific enough to enforce? |
+| 8 | **Acceptance criteria** | Is every Phase 1 feature testable as written? |

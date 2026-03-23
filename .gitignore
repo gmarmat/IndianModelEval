@@ -1,0 +1,87 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+*.whl
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env
+
+# Secrets
+.env.*
+!.env.example
+.secrets.baseline
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model weights — NEVER commit these
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.onnx
+*.gguf
+models/
+
+# Large data files
+data/
+*.csv
+*.tsv
+*.parquet
+*.arrow
+*.h5
+*.hdf5
+
+# Results directory (large files only — small JSONs are OK to commit)
+# results/ is tracked, but ignore large binary results
+results/*.bin
+results/*.pt
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+
+# Local / workspace-private files — not for public repo
+.claude/
+StartHere.md
+CLAUDE.md
+start.bat
+null
+docs/context/
+
+# HuggingFace cache — all kept inside project, never on C: drive
+.cache/
+.hf_cache/
+
+# Logs
+*.log
+logs/
+
+# Ruff / linting
+.ruff_cache/
+
+# mypy
+.mypy_cache/
+
+# pytest
+.pytest_cache/
+htmlcov/
+.coverage

@@ -1,0 +1,826 @@
+{
+  "schema_version": "1.0",
+  "harness_version": "2026.03.18.01",
+  "timestamp": "20260319T233306Z",
+  "model": {
+    "id": "krutrim-translate",
+    "display_name": "Krutrim Translate",
+    "hf_id": "krutrim-ai-labs/KrutrimTranslate",
+    "license": "Krutrim-Community-v1.0",
+    "revision_hash": null
+  },
+  "eval_config": {
+    "datasets": [
+      "flores200"
+    ],
+    "seed": 42,
+    "batch_size": 8,
+    "precision": "fp16",
+    "max_new_tokens": 256,
+    "dry_run": false,
+    "viability_threshold_chrf": 40.0
+  },
+  "reproducibility": {
+    "harness_git_hash": null,
+    "model_revision_hash": null,
+    "seed": 42
+  },
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "vram_total_mb": 24575.5
+  },
+  "aggregate": {
+    "n_pairs": 3,
+    "viable_pairs": 3,
+    "chrf_mean": 54.58,
+    "chrf_min": 51.06,
+    "chrf_max": 58.06,
+    "bleu_mean": 37.88,
+    "comet_mean": 0.8549,
+    "comet_mean_reliable_only": 0.8549,
+    "note": "Aggregate scores hide per-language variance. See per_language_pair for full breakdown."
+  },
+  "claims_verification": {
+    "model_id": "krutrim-translate",
+    "model_display_name": "Krutrim Translate",
+    "claimed_pairs": 90,
+    "viable_pairs": 3,
+    "failed_pairs": [
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "kan_Knda",
+        "src_lang_name": "English",
+        "tgt_lang_name": "Kannada",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "mar_Deva",
+        "src_lang_name": "English",
+        "tgt_lang_name": "Marathi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "mal_Mlym",
+        "src_lang_name": "English",
+        "tgt_lang_name": "Malayalam",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "guj_Gujr",
+        "src_lang_name": "English",
+        "tgt_lang_name": "Gujarati",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "pan_Guru",
+        "src_lang_name": "English",
+        "tgt_lang_name": "Punjabi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "tel_Telu",
+        "src_lang_name": "English",
+        "tgt_lang_name": "Telugu",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "ben_Beng",
+        "tgt_lang": "eng_Latn",
+        "src_lang_name": "Bengali",
+        "tgt_lang_name": "English",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "ben_Beng",
+        "tgt_lang": "hin_Deva",
+        "src_lang_name": "Bengali",
+        "tgt_lang_name": "Hindi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "ben_Beng",
+        "tgt_lang": "kan_Knda",
+        "src_lang_name": "Bengali",
+        "tgt_lang_name": "Kannada",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "ben_Beng",
+        "tgt_lang": "mar_Deva",
+        "src_lang_name": "Bengali",
+        "tgt_lang_name": "Marathi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "ben_Beng",
+        "tgt_lang": "mal_Mlym",
+        "src_lang_name": "Bengali",
+        "tgt_lang_name": "Malayalam",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "ben_Beng",
+        "tgt_lang": "guj_Gujr",
+        "src_lang_name": "Bengali",
+        "tgt_lang_name": "Gujarati",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "ben_Beng",
+        "tgt_lang": "pan_Guru",
+        "src_lang_name": "Bengali",
+        "tgt_lang_name": "Punjabi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "ben_Beng",
+        "tgt_lang": "tel_Telu",
+        "src_lang_name": "Bengali",
+        "tgt_lang_name": "Telugu",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "ben_Beng",
+        "tgt_lang": "tam_Taml",
+        "src_lang_name": "Bengali",
+        "tgt_lang_name": "Tamil",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "hin_Deva",
+        "tgt_lang": "eng_Latn",
+        "src_lang_name": "Hindi",
+        "tgt_lang_name": "English",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "hin_Deva",
+        "tgt_lang": "ben_Beng",
+        "src_lang_name": "Hindi",
+        "tgt_lang_name": "Bengali",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "hin_Deva",
+        "tgt_lang": "kan_Knda",
+        "src_lang_name": "Hindi",
+        "tgt_lang_name": "Kannada",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "hin_Deva",
+        "tgt_lang": "mar_Deva",
+        "src_lang_name": "Hindi",
+        "tgt_lang_name": "Marathi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "hin_Deva",
+        "tgt_lang": "mal_Mlym",
+        "src_lang_name": "Hindi",
+        "tgt_lang_name": "Malayalam",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "hin_Deva",
+        "tgt_lang": "guj_Gujr",
+        "src_lang_name": "Hindi",
+        "tgt_lang_name": "Gujarati",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "hin_Deva",
+        "tgt_lang": "pan_Guru",
+        "src_lang_name": "Hindi",
+        "tgt_lang_name": "Punjabi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "hin_Deva",
+        "tgt_lang": "tel_Telu",
+        "src_lang_name": "Hindi",
+        "tgt_lang_name": "Telugu",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "hin_Deva",
+        "tgt_lang": "tam_Taml",
+        "src_lang_name": "Hindi",
+        "tgt_lang_name": "Tamil",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "kan_Knda",
+        "tgt_lang": "eng_Latn",
+        "src_lang_name": "Kannada",
+        "tgt_lang_name": "English",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "kan_Knda",
+        "tgt_lang": "ben_Beng",
+        "src_lang_name": "Kannada",
+        "tgt_lang_name": "Bengali",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "kan_Knda",
+        "tgt_lang": "hin_Deva",
+        "src_lang_name": "Kannada",
+        "tgt_lang_name": "Hindi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "kan_Knda",
+        "tgt_lang": "mar_Deva",
+        "src_lang_name": "Kannada",
+        "tgt_lang_name": "Marathi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "kan_Knda",
+        "tgt_lang": "mal_Mlym",
+        "src_lang_name": "Kannada",
+        "tgt_lang_name": "Malayalam",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "kan_Knda",
+        "tgt_lang": "guj_Gujr",
+        "src_lang_name": "Kannada",
+        "tgt_lang_name": "Gujarati",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "kan_Knda",
+        "tgt_lang": "pan_Guru",
+        "src_lang_name": "Kannada",
+        "tgt_lang_name": "Punjabi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "kan_Knda",
+        "tgt_lang": "tel_Telu",
+        "src_lang_name": "Kannada",
+        "tgt_lang_name": "Telugu",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "kan_Knda",
+        "tgt_lang": "tam_Taml",
+        "src_lang_name": "Kannada",
+        "tgt_lang_name": "Tamil",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mar_Deva",
+        "tgt_lang": "eng_Latn",
+        "src_lang_name": "Marathi",
+        "tgt_lang_name": "English",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mar_Deva",
+        "tgt_lang": "ben_Beng",
+        "src_lang_name": "Marathi",
+        "tgt_lang_name": "Bengali",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mar_Deva",
+        "tgt_lang": "hin_Deva",
+        "src_lang_name": "Marathi",
+        "tgt_lang_name": "Hindi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mar_Deva",
+        "tgt_lang": "kan_Knda",
+        "src_lang_name": "Marathi",
+        "tgt_lang_name": "Kannada",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mar_Deva",
+        "tgt_lang": "mal_Mlym",
+        "src_lang_name": "Marathi",
+        "tgt_lang_name": "Malayalam",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mar_Deva",
+        "tgt_lang": "guj_Gujr",
+        "src_lang_name": "Marathi",
+        "tgt_lang_name": "Gujarati",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mar_Deva",
+        "tgt_lang": "pan_Guru",
+        "src_lang_name": "Marathi",
+        "tgt_lang_name": "Punjabi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mar_Deva",
+        "tgt_lang": "tel_Telu",
+        "src_lang_name": "Marathi",
+        "tgt_lang_name": "Telugu",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mar_Deva",
+        "tgt_lang": "tam_Taml",
+        "src_lang_name": "Marathi",
+        "tgt_lang_name": "Tamil",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mal_Mlym",
+        "tgt_lang": "eng_Latn",
+        "src_lang_name": "Malayalam",
+        "tgt_lang_name": "English",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mal_Mlym",
+        "tgt_lang": "ben_Beng",
+        "src_lang_name": "Malayalam",
+        "tgt_lang_name": "Bengali",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mal_Mlym",
+        "tgt_lang": "hin_Deva",
+        "src_lang_name": "Malayalam",
+        "tgt_lang_name": "Hindi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mal_Mlym",
+        "tgt_lang": "kan_Knda",
+        "src_lang_name": "Malayalam",
+        "tgt_lang_name": "Kannada",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mal_Mlym",
+        "tgt_lang": "mar_Deva",
+        "src_lang_name": "Malayalam",
+        "tgt_lang_name": "Marathi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mal_Mlym",
+        "tgt_lang": "guj_Gujr",
+        "src_lang_name": "Malayalam",
+        "tgt_lang_name": "Gujarati",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mal_Mlym",
+        "tgt_lang": "pan_Guru",
+        "src_lang_name": "Malayalam",
+        "tgt_lang_name": "Punjabi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mal_Mlym",
+        "tgt_lang": "tel_Telu",
+        "src_lang_name": "Malayalam",
+        "tgt_lang_name": "Telugu",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "mal_Mlym",
+        "tgt_lang": "tam_Taml",
+        "src_lang_name": "Malayalam",
+        "tgt_lang_name": "Tamil",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "guj_Gujr",
+        "tgt_lang": "eng_Latn",
+        "src_lang_name": "Gujarati",
+        "tgt_lang_name": "English",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "guj_Gujr",
+        "tgt_lang": "ben_Beng",
+        "src_lang_name": "Gujarati",
+        "tgt_lang_name": "Bengali",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "guj_Gujr",
+        "tgt_lang": "hin_Deva",
+        "src_lang_name": "Gujarati",
+        "tgt_lang_name": "Hindi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "guj_Gujr",
+        "tgt_lang": "kan_Knda",
+        "src_lang_name": "Gujarati",
+        "tgt_lang_name": "Kannada",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "guj_Gujr",
+        "tgt_lang": "mar_Deva",
+        "src_lang_name": "Gujarati",
+        "tgt_lang_name": "Marathi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "guj_Gujr",
+        "tgt_lang": "mal_Mlym",
+        "src_lang_name": "Gujarati",
+        "tgt_lang_name": "Malayalam",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "guj_Gujr",
+        "tgt_lang": "pan_Guru",
+        "src_lang_name": "Gujarati",
+        "tgt_lang_name": "Punjabi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "guj_Gujr",
+        "tgt_lang": "tel_Telu",
+        "src_lang_name": "Gujarati",
+        "tgt_lang_name": "Telugu",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "guj_Gujr",
+        "tgt_lang": "tam_Taml",
+        "src_lang_name": "Gujarati",
+        "tgt_lang_name": "Tamil",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "pan_Guru",
+        "tgt_lang": "eng_Latn",
+        "src_lang_name": "Punjabi",
+        "tgt_lang_name": "English",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "pan_Guru",
+        "tgt_lang": "ben_Beng",
+        "src_lang_name": "Punjabi",
+        "tgt_lang_name": "Bengali",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "pan_Guru",
+        "tgt_lang": "hin_Deva",
+        "src_lang_name": "Punjabi",
+        "tgt_lang_name": "Hindi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "pan_Guru",
+        "tgt_lang": "kan_Knda",
+        "src_lang_name": "Punjabi",
+        "tgt_lang_name": "Kannada",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "pan_Guru",
+        "tgt_lang": "mar_Deva",
+        "src_lang_name": "Punjabi",
+        "tgt_lang_name": "Marathi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "pan_Guru",
+        "tgt_lang": "mal_Mlym",
+        "src_lang_name": "Punjabi",
+        "tgt_lang_name": "Malayalam",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "pan_Guru",
+        "tgt_lang": "guj_Gujr",
+        "src_lang_name": "Punjabi",
+        "tgt_lang_name": "Gujarati",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "pan_Guru",
+        "tgt_lang": "tel_Telu",
+        "src_lang_name": "Punjabi",
+        "tgt_lang_name": "Telugu",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "pan_Guru",
+        "tgt_lang": "tam_Taml",
+        "src_lang_name": "Punjabi",
+        "tgt_lang_name": "Tamil",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tel_Telu",
+        "tgt_lang": "eng_Latn",
+        "src_lang_name": "Telugu",
+        "tgt_lang_name": "English",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tel_Telu",
+        "tgt_lang": "ben_Beng",
+        "src_lang_name": "Telugu",
+        "tgt_lang_name": "Bengali",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tel_Telu",
+        "tgt_lang": "hin_Deva",
+        "src_lang_name": "Telugu",
+        "tgt_lang_name": "Hindi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tel_Telu",
+        "tgt_lang": "kan_Knda",
+        "src_lang_name": "Telugu",
+        "tgt_lang_name": "Kannada",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tel_Telu",
+        "tgt_lang": "mar_Deva",
+        "src_lang_name": "Telugu",
+        "tgt_lang_name": "Marathi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tel_Telu",
+        "tgt_lang": "mal_Mlym",
+        "src_lang_name": "Telugu",
+        "tgt_lang_name": "Malayalam",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tel_Telu",
+        "tgt_lang": "guj_Gujr",
+        "src_lang_name": "Telugu",
+        "tgt_lang_name": "Gujarati",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tel_Telu",
+        "tgt_lang": "pan_Guru",
+        "src_lang_name": "Telugu",
+        "tgt_lang_name": "Punjabi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tel_Telu",
+        "tgt_lang": "tam_Taml",
+        "src_lang_name": "Telugu",
+        "tgt_lang_name": "Tamil",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tam_Taml",
+        "tgt_lang": "eng_Latn",
+        "src_lang_name": "Tamil",
+        "tgt_lang_name": "English",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tam_Taml",
+        "tgt_lang": "ben_Beng",
+        "src_lang_name": "Tamil",
+        "tgt_lang_name": "Bengali",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tam_Taml",
+        "tgt_lang": "hin_Deva",
+        "src_lang_name": "Tamil",
+        "tgt_lang_name": "Hindi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tam_Taml",
+        "tgt_lang": "kan_Knda",
+        "src_lang_name": "Tamil",
+        "tgt_lang_name": "Kannada",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tam_Taml",
+        "tgt_lang": "mar_Deva",
+        "src_lang_name": "Tamil",
+        "tgt_lang_name": "Marathi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tam_Taml",
+        "tgt_lang": "mal_Mlym",
+        "src_lang_name": "Tamil",
+        "tgt_lang_name": "Malayalam",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tam_Taml",
+        "tgt_lang": "guj_Gujr",
+        "src_lang_name": "Tamil",
+        "tgt_lang_name": "Gujarati",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tam_Taml",
+        "tgt_lang": "pan_Guru",
+        "src_lang_name": "Tamil",
+        "tgt_lang_name": "Punjabi",
+        "reason": "not_evaluated",
+        "chrf": null
+      },
+      {
+        "src_lang": "tam_Taml",
+        "tgt_lang": "tel_Telu",
+        "src_lang_name": "Tamil",
+        "tgt_lang_name": "Telugu",
+        "reason": "not_evaluated",
+        "chrf": null
+      }
+    ],
+    "viability_rate": 0.033,
+    "viability_threshold_chrf": 40.0,
+    "verdict": "claims_unverified",
+    "tested_pairs": 3
+  },
+  "per_language_pair": [
+    {
+      "src_lang": "eng_Latn",
+      "tgt_lang": "ben_Beng",
+      "src_lang_name": "English",
+      "tgt_lang_name": "Bengali",
+      "dataset": "flores200",
+      "chrf": 51.06,
+      "bleu": 36.74,
+      "comet": 0.867,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 1012
+    },
+    {
+      "src_lang": "eng_Latn",
+      "tgt_lang": "hin_Deva",
+      "src_lang_name": "English",
+      "tgt_lang_name": "Hindi",
+      "dataset": "flores200",
+      "chrf": 58.06,
+      "bleu": 41.07,
+      "comet": 0.8068,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 1012
+    },
+    {
+      "src_lang": "eng_Latn",
+      "tgt_lang": "tam_Taml",
+      "src_lang_name": "English",
+      "tgt_lang_name": "Tamil",
+      "dataset": "flores200",
+      "chrf": 54.63,
+      "bleu": 35.84,
+      "comet": 0.891,
+      "viable": true,
+      "comet_reliable": true,
+      "comet_reliability_note": null,
+      "n_sentences": 1012
+    }
+  ],
+  "latency": {
+    "per_pair": [
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "ben_Beng",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 14.75,
+        "sentences_per_second": 68.6,
+        "n_sentences": 1012
+      },
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "hin_Deva",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 11.72,
+        "sentences_per_second": 86.36,
+        "n_sentences": 1012
+      },
+      {
+        "src_lang": "eng_Latn",
+        "tgt_lang": "tam_Taml",
+        "dataset": "flores200",
+        "vram_peak_mb": 0.0,
+        "latency_seconds": 20.02,
+        "sentences_per_second": 50.55,
+        "n_sentences": 1012
+      }
+    ]
+  }
+}
