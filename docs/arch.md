@@ -1,6 +1,6 @@
 # IndianModelsEval — Architecture
 
-**Version:** 0.5 | **Updated:** 2026-03-22
+**Version:** 0.6 | **Updated:** 2026-03-23
 
 > **LLM Instructions:** Token-optimized index. Read top-to-bottom. Tables over prose. Detailed docs in `docs/features/*.md`.
 
@@ -47,7 +47,8 @@ IndianModelsEval/
 │   └── utils/
 │       └── cost_guard.py           # API cost cap ($20 hard limit)
 ├── scripts/
-│   └── download_datasets.py    # One-time dataset download
+│   ├── download_datasets.py    # One-time dataset download
+│   └── run_eval_cli.py         # Headless CLI runner (no Gradio required)
 ├── results/                    # Committed JSON results
 ├── data/                       # gitignored — dataset cache
 ├── models/
@@ -129,7 +130,7 @@ ResultsWriter        → results/{model}_{dataset}_{timestamp}.json
 6. **Two-phase eval** — Phase 1: all translations (translation model only on GPU); Phase 2: clear translation model, run COMET. Prevents dual-model VRAM pressure on 24GB.
 7. **Partial save + auto-resume** — translations saved to `_partial_{model_id}.json` after each pair. On restart, completed pairs are loaded and skipped. OOM never loses more than one pair.
 8. **Background eval thread** — `threading.Thread(daemon=False)` keeps running after browser close. `gr.Timer` polls status every 5s. Pause/Stop via `threading.Event` objects.
-9. **IndicTrans2 script normalization** — model encodes ALL Indic scripts internally as Devanagari. En→Indic: post-process output with `UnicodeIndicTransliterator(hi → target)`. Indic→En: pre-process input with transliteration `(source → hi)` before tokenization.
+9. **IndicTrans2 script normalization** — model encodes ALL Indic scripts internally as Devanagari. En→Indic: post-process output with `UnicodeIndicTransliterator(hi → target)`. Indic→En: pre-process input with `UnicodeIndicTransliterator(source → hi)` before tokenization. Santhali (Ol Chiki), Sindhi (Arabic), Manipuri (Meitei Mayek) unsupported by IndicNLP — skip transliteration.
 10. **FLORES code remapping** — `dataset_loader.py:FLORES_PLUS_CODE_MAP` remaps IndicTrans2 lang codes to flores_plus dataset codes (e.g. `doi_Deva → dgo_Deva` for Dogri).
 
 ---
@@ -163,3 +164,4 @@ ResultsWriter        → results/{model}_{dataset}_{timestamp}.json
 | 0.3 | 2026-03-20 | **IndicTrans2 En→Indic eval.** Devanagari-unified encoding fix, UnicodeIndicTransliterator post-processing, token skip (`[:, 2:]`), two-phase eval, partial save + auto-resume, background thread + Pause/Stop UI, `expandable_segments:True`. |
 | 0.4 | 2026-03-23 | **IndicTrans2 Indic→En eval.** Completed; non-Devanagari input scripts still score low — needs pre-tokenization transliteration fix before re-run. |
 | 0.5 | 2026-03-22 | **GitHub release.** Public repo at github.com/gmarmat/IndianModelEval. Private files excluded. New Key Patterns 6-10 documented. |
+| 0.6 | 2026-03-23 | **Indic→En transliteration fix + CLI runner.** Pre-tokenization transliteration added to `indictrans2/runner.py`; re-run yields 19/22 viable (up from 11/22), verdict `mostly_verified`. `scripts/run_eval_cli.py` added for headless runs. |
