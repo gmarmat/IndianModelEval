@@ -1,6 +1,6 @@
 # IndianModelsEval — Architecture
 
-**Version:** 0.1 | **Updated:** 2026-03-18
+**Version:** 0.5 | **Updated:** 2026-03-22
 
 > **LLM Instructions:** Token-optimized index. Read top-to-bottom. Tables over prose. Detailed docs in `docs/features/*.md`.
 
@@ -67,11 +67,14 @@ IndianModelsEval/
 ### Environment Variables
 
 ```
-# Required for dataset download
+# Required for dataset download / gated models
 HF_TOKEN=
 
 # Optional — API inference (local weights default)
 SARVAM_API_KEY=
+
+# CUDA allocator — set at app startup to prevent fragmentation on long runs
+PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 ```
 
 ---
@@ -122,7 +125,12 @@ ResultsWriter        → results/{model}_{dataset}_{timestamp}.json
 2. **Dry-run first** — every eval defaults to prompting for `--dry-run`. Runs 5 sentences, reports estimated time + VRAM.
 3. **Pin everything** — results JSON records model revision hash, seed, dataset version, timestamp, precision, batch size.
 4. **Pydantic config** — `EvalConfig` validates all eval parameters. No secret values in config files.
-5. **VRAM guard** — `torch.cuda.empty_cache()` after every model eval. Batch size configured per model in registry.
+5. **VRAM guard** — `torch.cuda.empty_cache()` + `gc.collect()` between every pair. `expandable_segments:True` prevents CUDA allocator fragmentation across long runs.
+6. **Two-phase eval** — Phase 1: all translations (translation model only on GPU); Phase 2: clear translation model, run COMET. Prevents dual-model VRAM pressure on 24GB.
+7. **Partial save + auto-resume** — translations saved to `_partial_{model_id}.json` after each pair. On restart, completed pairs are loaded and skipped. OOM never loses more than one pair.
+8. **Background eval thread** — `threading.Thread(daemon=False)` keeps running after browser close. `gr.Timer` polls status every 5s. Pause/Stop via `threading.Event` objects.
+9. **IndicTrans2 script normalization** — model encodes ALL Indic scripts internally as Devanagari. En→Indic: post-process output with `UnicodeIndicTransliterator(hi → target)`. Indic→En: pre-process input with transliteration `(source → hi)` before tokenization.
+10. **FLORES code remapping** — `dataset_loader.py:FLORES_PLUS_CODE_MAP` remaps IndicTrans2 lang codes to flores_plus dataset codes (e.g. `doi_Deva → dgo_Deva` for Dogri).
 
 ---
 
@@ -130,15 +138,15 @@ ResultsWriter        → results/{model}_{dataset}_{timestamp}.json
 
 | # | Feature | Doc | Phase | Status |
 |---|---------|-----|-------|--------|
-| 1 | Model Registry | [model-registry.md](./features/model-registry.md) | 1 | planned |
-| 2 | Dataset Loader | [eval-pipeline.md](./features/eval-pipeline.md) | 1 | planned |
-| 3 | Test Planner | [eval-pipeline.md](./features/eval-pipeline.md) | 1 | planned |
-| 4 | Eval Runner | [eval-pipeline.md](./features/eval-pipeline.md) | 1 | planned |
-| 5 | Scoring Pipeline | [eval-pipeline.md](./features/eval-pipeline.md) | 1 | planned |
-| 6 | Claims Verifier | [eval-pipeline.md](./features/eval-pipeline.md) | 1 | planned |
-| 7 | Results Writer | [results-schema.md](./features/results-schema.md) | 1 | planned |
-| 8 | Sarvam Isolation | [eval-pipeline.md](./features/eval-pipeline.md) | 1 | planned |
-| 9 | Local Web UI | [ui.md](./features/ui.md) | 1 | planned |
+| 1 | Model Registry | [model-registry.md](./features/model-registry.md) | 1 | done |
+| 2 | Dataset Loader | [eval-pipeline.md](./features/eval-pipeline.md) | 1 | done |
+| 3 | Test Planner | [eval-pipeline.md](./features/eval-pipeline.md) | 1 | done |
+| 4 | Eval Runner | [eval-pipeline.md](./features/eval-pipeline.md) | 1 | done |
+| 5 | Scoring Pipeline | [eval-pipeline.md](./features/eval-pipeline.md) | 1 | done |
+| 6 | Claims Verifier | [eval-pipeline.md](./features/eval-pipeline.md) | 1 | done |
+| 7 | Results Writer | [results-schema.md](./features/results-schema.md) | 1 | done |
+| 8 | Sarvam Isolation | [eval-pipeline.md](./features/eval-pipeline.md) | 1 | done |
+| 9 | Local Web UI (Gradio, Pause/Stop, bg thread) | — | 1 | done |
 | 10 | Indic-COMET + xCOMET | [eval-pipeline.md](./features/eval-pipeline.md) | 2 | planned |
 | 11 | Indic↔Indic pairs | [eval-pipeline.md](./features/eval-pipeline.md) | 2 | planned |
 | 12 | Tokenization Fertility | [eval-pipeline.md](./features/eval-pipeline.md) | 2 | planned |
@@ -151,3 +159,7 @@ ResultsWriter        → results/{model}_{dataset}_{timestamp}.json
 | Ver | Date | Changes |
 |-----|------|---------|
 | 0.1 | 2026-03-18 | **Initial scaffold.** Architecture from PRD + plans. Phase 1 code written. |
+| 0.2 | 2026-03-19 | **NLLB + Krutrim evals.** First results committed. FLORES `dev` split fix, Dogri code remap (`doi_Deva→dgo_Deva`). |
+| 0.3 | 2026-03-20 | **IndicTrans2 En→Indic eval.** Devanagari-unified encoding fix, UnicodeIndicTransliterator post-processing, token skip (`[:, 2:]`), two-phase eval, partial save + auto-resume, background thread + Pause/Stop UI, `expandable_segments:True`. |
+| 0.4 | 2026-03-23 | **IndicTrans2 Indic→En eval.** Completed; non-Devanagari input scripts still score low — needs pre-tokenization transliteration fix before re-run. |
+| 0.5 | 2026-03-22 | **GitHub release.** Public repo at github.com/gmarmat/IndianModelEval. Private files excluded. New Key Patterns 6-10 documented. |
