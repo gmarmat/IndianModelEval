@@ -1,6 +1,6 @@
 # IndianModelsEval — Architecture
 
-**Version:** 0.6 | **Updated:** 2026-03-23
+**Version:** 0.7 | **Updated:** 2026-03-23
 
 > **LLM Instructions:** Token-optimized index. Read top-to-bottom. Tables over prose. Detailed docs in `docs/features/*.md`.
 
@@ -132,6 +132,7 @@ ResultsWriter        → results/{model}_{dataset}_{timestamp}.json
 8. **Background eval thread** — `threading.Thread(daemon=False)` keeps running after browser close. `gr.Timer` polls status every 5s. Pause/Stop via `threading.Event` objects.
 9. **IndicTrans2 script normalization** — model encodes ALL Indic scripts internally as Devanagari. En→Indic: post-process output with `UnicodeIndicTransliterator(hi → target)`. Indic→En: pre-process input with `UnicodeIndicTransliterator(source → hi)` before tokenization. Santhali (Ol Chiki), Sindhi (Arabic), Manipuri (Meitei Mayek) unsupported by IndicNLP — skip transliteration.
 10. **FLORES code remapping** — `dataset_loader.py:FLORES_PLUS_CODE_MAP` remaps IndicTrans2 lang codes to flores_plus dataset codes (e.g. `doi_Deva → dgo_Deva` for Dogri).
+11. **Explicit pairs registry** — models that don't support full src×tgt cartesian products (e.g. Krutrim: English↔Indic only) use `claimed_languages.pairs: [[src, tgt], ...]` in `model_registry.yaml`. `ModelEntry.claimed_pairs` checks for this key before falling back to cartesian product.
 
 ---
 
@@ -165,3 +166,4 @@ ResultsWriter        → results/{model}_{dataset}_{timestamp}.json
 | 0.4 | 2026-03-23 | **IndicTrans2 Indic→En eval.** Completed; non-Devanagari input scripts still score low — needs pre-tokenization transliteration fix before re-run. |
 | 0.5 | 2026-03-22 | **GitHub release.** Public repo at github.com/gmarmat/IndianModelEval. Private files excluded. New Key Patterns 6-10 documented. |
 | 0.6 | 2026-03-23 | **Indic→En transliteration fix + CLI runner.** Pre-tokenization transliteration added to `indictrans2/runner.py`; re-run yields 19/22 viable (up from 11/22), verdict `mostly_verified`. `scripts/run_eval_cli.py` added for headless runs. |
+| 0.7 | 2026-03-23 | **NLLB + Krutrim full evals.** NLLB: 148/182 viable, `mostly_verified` (Assamese weak spot). Krutrim: 18/18 viable, `claims_verified`. Registry fix: `claimed_languages.pairs` list for English-only models (replaces cartesian product). |
