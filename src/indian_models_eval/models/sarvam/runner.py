@@ -79,13 +79,13 @@ def translate_sarvam(
     if src_lang not in _SARVAM_LANG_NAMES:
         raise ValueError(f"Sarvam does not support source language: {src_lang}")
 
-    logger.info("Loading Sarvam-Translate from %s (precision=%s)", model_path, precision)
-    if precision == "bf16":
-        dtype = torch.bfloat16
-    elif precision == "fp16":
-        dtype = torch.float16
-    else:
-        dtype = torch.float32
+    # Gemma3 was trained in bf16 — fp16 produces NaN/garbage from the attention
+    # softcapping path and yields empty outputs after skip_special_tokens.
+    # Force bf16 regardless of caller-passed precision.
+    if precision == "fp16":
+        logger.warning("Sarvam: caller asked for fp16; forcing bf16 (Gemma3 is unstable in fp16).")
+    dtype = torch.bfloat16
+    logger.info("Loading Sarvam-Translate from %s (dtype=bf16)", model_path)
 
     tokenizer = AutoTokenizer.from_pretrained(model_path)
     # Decoder-only batched generation requires left-padding so generated tokens
@@ -129,11 +129,15 @@ def translate_sarvam(
             ).to("cuda")
             input_token_len = inputs["input_ids"].shape[1]
 
+            # cache_implementation="dynamic": Gemma3's default hybrid cache
+            # silently produces empty outputs under batched left-padded generation.
+            # Dynamic cache works correctly for our throughput-shaped workload.
             output_ids = model.generate(
                 **inputs,
                 max_new_tokens=max_new_tokens,
                 do_sample=False,
                 pad_token_id=tokenizer.pad_token_id,
+                cache_implementation="dynamic",
             )
 
             # With left-padding, generated tokens start at the same index for every row.

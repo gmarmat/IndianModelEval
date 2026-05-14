@@ -239,7 +239,10 @@ class EvalRunner:
             if result.stderr:
                 logger.debug("Sarvam runner stderr: %s", result.stderr)
 
-            with output_path.open() as f:
+            # encoding="utf-8" required: subprocess JSON contains non-ASCII
+            # if a runner writes with ensure_ascii=False, and on Windows the
+            # default locale encoding (cp1252) silently mangles it.
+            with output_path.open(encoding="utf-8") as f:
                 data = json.load(f)
 
             return data["translations"]
