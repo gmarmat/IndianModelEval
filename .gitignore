@@ -37,7 +37,7 @@ env/
 *.safetensors
 *.onnx
 *.gguf
-models/
+/models/
 
 # Large data files
 data/

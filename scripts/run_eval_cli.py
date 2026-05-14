@@ -195,7 +195,7 @@ def main() -> None:
     logger.info("=" * 60)
     logger.info("Results: %s", output_path)
     logger.info("Viable: %d/%d (chrF++ >= 40)", verdict.viable_pairs, verdict.tested_pairs)
-    logger.info("Verdict: %s", verdict.verdict)
+    logger.info("Verdict: %s", verdict._verdict_label())
     logger.info("")
     for score in sorted(all_scores, key=lambda s: s.chrf, reverse=True):
         src = FLORES_LANG_CODES.get(score.src_lang, score.src_lang)
