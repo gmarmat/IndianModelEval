@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
-# IndianModelsEval — Sarvam-Translate Runner
+# IndianModelsEval — Sarvam-Translate Runner (decoder-only, Gemma3 chat-template)
 # Copyright (C) 2026 IndianModelsEval contributors
 #
 # This file is part of the Sarvam-Translate evaluation wrapper,
@@ -16,7 +16,7 @@
 #
 # Input JSON schema:
 #   { "sentences": [...], "src_lang": "eng_Latn", "tgt_lang": "hin_Deva",
-#     "model_path": "...", "batch_size": 8, "precision": "fp16" }
+#     "model_path": "...", "batch_size": 8, "precision": "bf16" }
 #
 # Output JSON schema:
 #   { "translations": [...], "model_revision": "..." }
@@ -29,23 +29,37 @@ import sys
 from pathlib import Path
 
 import torch
-from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
 
-_SARVAM_LANG_MAP = {
-    "eng_Latn": "en",
-    "ben_Beng": "bn",
-    "guj_Gujr": "gu",
-    "hin_Deva": "hi",
-    "kan_Knda": "kn",
-    "mal_Mlym": "ml",
-    "mar_Deva": "mr",
-    "ory_Orya": "or",
-    "pan_Guru": "pa",
-    "tam_Taml": "ta",
-    "tel_Telu": "te",
+# FLORES-200 code -> English language name used in Sarvam's system prompt.
+# Sarvam-Translate's HF card supports all 22 official Indian languages + English.
+_SARVAM_LANG_NAMES = {
+    "eng_Latn": "English",
+    "asm_Beng": "Assamese",
+    "ben_Beng": "Bengali",
+    "brx_Deva": "Bodo",
+    "doi_Deva": "Dogri",
+    "gom_Deva": "Konkani",
+    "guj_Gujr": "Gujarati",
+    "hin_Deva": "Hindi",
+    "kan_Knda": "Kannada",
+    "kas_Arab": "Kashmiri",
+    "mai_Deva": "Maithili",
+    "mal_Mlym": "Malayalam",
+    "mar_Deva": "Marathi",
+    "mni_Beng": "Manipuri",
+    "npi_Deva": "Nepali",
+    "ory_Orya": "Odia",
+    "pan_Guru": "Punjabi",
+    "san_Deva": "Sanskrit",
+    "sat_Olck": "Santali",
+    "snd_Arab": "Sindhi",
+    "tam_Taml": "Tamil",
+    "tel_Telu": "Telugu",
+    "urd_Arab": "Urdu",
 }
 
 
@@ -55,52 +69,80 @@ def translate_sarvam(
     tgt_lang: str,
     model_path: str,
     batch_size: int = 8,
-    precision: str = "fp16",
+    precision: str = "bf16",
+    max_new_tokens: int = 256,
 ) -> list[str]:
-    src_code = _SARVAM_LANG_MAP.get(src_lang)
-    tgt_code = _SARVAM_LANG_MAP.get(tgt_lang)
-
-    if src_code is None:
-        raise ValueError(f"Sarvam does not support source language: {src_lang}")
-    if tgt_code is None:
+    tgt_name = _SARVAM_LANG_NAMES.get(tgt_lang)
+    if tgt_name is None:
         raise ValueError(f"Sarvam does not support target language: {tgt_lang}")
+    # Source language is implicit in the input text; Sarvam infers it.
+    if src_lang not in _SARVAM_LANG_NAMES:
+        raise ValueError(f"Sarvam does not support source language: {src_lang}")
 
-    logger.info("Loading Sarvam-Translate from %s", model_path)
-    dtype = torch.float16 if precision == "fp16" else torch.float32
+    logger.info("Loading Sarvam-Translate from %s (precision=%s)", model_path, precision)
+    if precision == "bf16":
+        dtype = torch.bfloat16
+    elif precision == "fp16":
+        dtype = torch.float16
+    else:
+        dtype = torch.float32
 
     tokenizer = AutoTokenizer.from_pretrained(model_path)
-    model = AutoModelForSeq2SeqLM.from_pretrained(
+    # Decoder-only batched generation requires left-padding so generated tokens
+    # continue from the actual end of each prompt, not from trailing pads.
+    tokenizer.padding_side = "left"
+    if tokenizer.pad_token_id is None:
+        tokenizer.pad_token_id = tokenizer.eos_token_id
+
+    model = AutoModelForCausalLM.from_pretrained(
         model_path,
         torch_dtype=dtype,
         low_cpu_mem_usage=True,
     ).cuda().eval()
 
+    system_prompt = f"Translate the text below to {tgt_name}."
     results: list[str] = []
+    total_batches = (len(sentences) + batch_size - 1) // batch_size
 
     with torch.inference_mode():
-        for i in range(0, len(sentences), batch_size):
+        for batch_idx, i in enumerate(range(0, len(sentences), batch_size)):
             batch = sentences[i : i + batch_size]
-
-            # Sarvam uses forced_bos_token_id for target language
-            tgt_lang_id = tokenizer.convert_tokens_to_ids(f"<2{tgt_code}>")
+            prompts: list[str] = []
+            for sent in batch:
+                messages = [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": sent},
+                ]
+                text = tokenizer.apply_chat_template(
+                    messages,
+                    tokenize=False,
+                    add_generation_prompt=True,
+                )
+                prompts.append(text)
 
             inputs = tokenizer(
-                batch,
+                prompts,
                 return_tensors="pt",
                 padding=True,
                 truncation=True,
-                max_length=512,
+                max_length=2048,
             ).to("cuda")
+            input_token_len = inputs["input_ids"].shape[1]
 
             output_ids = model.generate(
                 **inputs,
-                forced_bos_token_id=tgt_lang_id,
-                num_beams=5,
-                max_length=256,
+                max_new_tokens=max_new_tokens,
+                do_sample=False,
+                pad_token_id=tokenizer.pad_token_id,
             )
 
-            decoded = tokenizer.batch_decode(output_ids, skip_special_tokens=True)
-            results.extend(decoded)
+            # With left-padding, generated tokens start at the same index for every row.
+            generated = output_ids[:, input_token_len:]
+            decoded = tokenizer.batch_decode(generated, skip_special_tokens=True)
+            results.extend(s.strip() for s in decoded)
+
+            if (batch_idx + 1) % 10 == 0 or batch_idx + 1 == total_batches:
+                logger.info("batch %d/%d done", batch_idx + 1, total_batches)
 
     return results
 
@@ -122,10 +164,10 @@ def main() -> None:
         tgt_lang=data["tgt_lang"],
         model_path=data["model_path"],
         batch_size=data.get("batch_size", 8),
-        precision=data.get("precision", "fp16"),
+        precision=data.get("precision", "bf16"),
+        max_new_tokens=data.get("max_new_tokens", 256),
     )
 
-    # Get model revision hash if available
     revision = None
     try:
         refs = Path(data["model_path"]) / "refs" / "main"

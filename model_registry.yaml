@@ -1,14 +1,14 @@
-# IndianModelsEval — Model Registry
+﻿# IndianModelsEval â€” Model Registry
 # Each entry defines a model's claimed capabilities, where to find it, and eval config.
 # Add new models only after confirming local weights are available.
 #
 # FLORES-200 language codes: {lang}_{Script}  e.g. hin_Deva, eng_Latn, tam_Taml
-# See src/indian_models_eval/config.py → FLORES_LANG_CODES for full list.
+# See src/indian_models_eval/config.py â†’ FLORES_LANG_CODES for full list.
 
 models:
 
   - id: indictrans2-en-indic
-    display_name: "IndicTrans2 (En→Indic)"
+    display_name: "IndicTrans2 (Enâ†’Indic)"
     hf_id: "ai4bharat/indictrans2-en-indic-1B"
     local_path: "models/translation/indictrans2-en-indic-1B"
     type: seq2seq
@@ -43,10 +43,10 @@ models:
       batch_size: 64
       max_new_tokens: 256
       precision: fp16
-      notes: "use_cache=False required — KV cache has None tensors incompatible with HF beam search"
+      notes: "use_cache=False required â€” KV cache has None tensors incompatible with HF beam search"
 
   - id: indictrans2-indic-en
-    display_name: "IndicTrans2 (Indic→En)"
+    display_name: "IndicTrans2 (Indicâ†’En)"
     hf_id: "ai4bharat/indictrans2-indic-en-1B"
     local_path: "models/translation/indictrans2-indic-en-1B"
     type: seq2seq
@@ -86,18 +86,18 @@ models:
     display_name: "Sarvam-Translate"
     hf_id: "sarvamai/sarvam-translate"
     local_path: "models/translation/sarvam-translate"
-    type: seq2seq
+    type: decoder_only
     license: GPL-3.0
     direction: bidirectional
-    isolation: subprocess  # REQUIRED — GPL-3.0 isolation
+    isolation: subprocess  # REQUIRED â€” GPL-3.0 isolation
     claimed_languages:
       src: [eng_Latn, ben_Beng, guj_Gujr, hin_Deva, kan_Knda, mal_Mlym, mar_Deva, ory_Orya, pan_Guru, tam_Taml, tel_Telu]
       tgt: [eng_Latn, ben_Beng, guj_Gujr, hin_Deva, kan_Knda, mal_Mlym, mar_Deva, ory_Orya, pan_Guru, tam_Taml, tel_Telu]
     eval_config:
       batch_size: 8
       max_new_tokens: 256
-      precision: fp16
-      notes: "June 2025 release. GPL-3.0 — runner called via subprocess only."
+      precision: bf16
+      notes: "June 2025 release. GPL-3.0 â€” runner called via subprocess only."
 
   - id: nllb-200-distilled-600M
     display_name: "NLLB-200 (600M)"
@@ -113,7 +113,7 @@ models:
       batch_size: 32
       max_new_tokens: 256
       precision: fp16
-      notes: "CC-BY-NC-4.0 — non-commercial research only. NEVER use in commercial products."
+      notes: "CC-BY-NC-4.0 â€” non-commercial research only. NEVER use in commercial products."
 
   - id: gemma-3-4b-it
     display_name: "Gemma-3-4B-IT"
@@ -123,7 +123,7 @@ models:
     license: Gemma
     direction: bidirectional
     claimed_languages:
-      # Gemma doesn't claim specific translation pairs — testing capability
+      # Gemma doesn't claim specific translation pairs â€” testing capability
       src: [eng_Latn, hin_Deva, ben_Beng, tam_Taml, tel_Telu]
       tgt: [eng_Latn, hin_Deva, ben_Beng, tam_Taml, tel_Telu]
     eval_config:
@@ -141,7 +141,7 @@ models:
     license: Krutrim-Community-v1.0
     direction: bidirectional
     claimed_languages:
-      # Krutrim only supports English↔Indic — no Indic→Indic. Use explicit pairs.
+      # Krutrim only supports Englishâ†”Indic â€” no Indicâ†’Indic. Use explicit pairs.
       pairs:
         - [eng_Latn, ben_Beng]
         - [eng_Latn, hin_Deva]
@@ -164,7 +164,8 @@ models:
     eval_config:
       batch_size: 32
       beam_len: 3
-      notes: "CTranslate2 format. Two checkpoints: ct_model_english_indic + ct_model_indic_english. AIKosh/Krutrim — no independent eval exists."
+      notes: "CTranslate2 format. Two checkpoints: ct_model_english_indic + ct_model_indic_english. AIKosh/Krutrim â€” no independent eval exists."
 
 # Models under investigation (not yet in registry):
 # - krutrim-translate: API-only as of 2026-03, no local weights confirmed (open question in PRD)
+
