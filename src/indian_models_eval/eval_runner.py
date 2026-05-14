@@ -229,12 +229,19 @@ class EvalRunner:
 
         output_path = input_path.with_suffix(".out.json")
 
+        # CREATE_NO_WINDOW (0x08000000) prevents the child from getting its own
+        # console window. Without this, Intel MKL inside the subprocess traps
+        # console-close events and aborts with forrtl error 200 when the
+        # session disconnects (RDP detach, scheduled-task session change, etc.).
+        _creationflags = 0x08000000 if sys.platform == "win32" else 0
+
         try:
             result = subprocess.run(
                 [sys.executable, str(sarvam_runner), str(input_path), str(output_path)],
                 check=True,
                 capture_output=True,
                 text=True,
+                creationflags=_creationflags,
             )
             if result.stderr:
                 logger.debug("Sarvam runner stderr: %s", result.stderr)
