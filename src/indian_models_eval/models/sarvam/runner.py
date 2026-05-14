@@ -176,8 +176,10 @@ def main() -> None:
     except Exception:
         pass
 
+    # ensure_ascii=True: round-trips safely through harness's _run_subprocess
+    # which opens output JSON with the default locale encoding (cp1252 on Windows).
     with output_path.open("w", encoding="utf-8") as f:
-        json.dump({"translations": translations, "model_revision": revision}, f, ensure_ascii=False)
+        json.dump({"translations": translations, "model_revision": revision}, f)
 
 
 if __name__ == "__main__":
