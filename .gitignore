@@ -47,6 +47,8 @@ data/
 *.arrow
 *.h5
 *.hdf5
+# Project-summary CSV is small + committed
+!SUMMARY.csv
 
 # Results directory (large files only — small JSONs are OK to commit)
 # results/ is tracked, but ignore large binary results
