@@ -23,16 +23,15 @@ If you have a GPU and want to contribute evaluation results for a model that isn
 
 ## Models Evaluated
 
-| Model | Direction | Viable Pairs | chrF++ Mean | Verdict |
-|-------|-----------|-------------|-------------|---------|
-| [NLLB-200-distilled-600M](https://huggingface.co/facebook/nllb-200-distilled-600M) | En→Indic | 142/182 | 43.4 | Mostly verified |
-| [IndicTrans2-1B](https://huggingface.co/ai4bharat/indictrans2-en-indic-1B) | En→Indic | 13/22 | 40.8 | Partially verified |
-| [IndicTrans2-1B](https://huggingface.co/ai4bharat/indictrans2-indic-en-1B) | Indic→En | 11/22 | 40.5 | Partially verified |
-| [Krutrim Translate](https://huggingface.co/krutrim-ai-labs/KrutrimTranslate) | En→Indic | 3/3 tested | 54.6 | Unverified (90 claimed) |
+| Model | Direction | Viable Pairs | Mean chrF++ | License | Verdict |
+|-------|-----------|--------------|-------------|---------|---------|
+| [NLLB-200-distilled-600M](https://huggingface.co/facebook/nllb-200-distilled-600M) | bidirectional | 148/182 (81%) | 43.4 | CC-BY-NC-4.0 | Verified. Quietly the strongest model on Indic↔Indic (88% of those pairs viable). |
+| [IndicTrans2-1B (Indic→En)](https://huggingface.co/ai4bharat/indictrans2-indic-en-1B) | Indic→English | 19/22 (86%) | — | MIT | Verified. Highest of any model tested on Indic→English. |
+| [IndicTrans2-1B (En→Indic)](https://huggingface.co/ai4bharat/indictrans2-en-indic-1B) | English→Indic | 13/22 (59%) | — | MIT | Partially verified. Strong on top-resource, weak on long-tail. |
+| [Krutrim Translate](https://huggingface.co/krutrim-ai-labs/Krutrim-Translate) | English↔Indic | 18/18 (100%) | 54.6 | Krutrim Community | Verified. Mean ~55 chrF++ congruent with vendor's own published ~52 on IN22-gen. Vendor's claim is latency-focused ("4X faster than IndicTrans2 distilled"), not quality. |
+| [Sarvam-Translate](https://huggingface.co/sarvamai/sarvam-translate) | bidirectional | 20/110 (18%) | — | **GPL-3.0** | Verified with caveat. Strong on English-pivot. **0 of 90 Indic↔Indic pairs cleared the bar** — model silently returns English on Indic↔Indic. Documented in [HF discussion #13](https://huggingface.co/sarvamai/sarvam-translate/discussions/13). |
 
-> A pair is **viable** if chrF++ ≥ 40. COMET scores use `Unbabel/wmt22-comet-da`.
-
-Full per-language breakdowns are in [`results/`](./results/).
+> A pair is **viable** if chrF++ ≥ 40. COMET scores use `Unbabel/wmt22-comet-da`. Full per-pair JSONs in [`results/`](./results/); aggregated numbers in [`SUMMARY.csv`](./SUMMARY.csv).
 
 ---
 
@@ -104,7 +103,7 @@ IndianModelEval/
 ### Setup
 
 ```bash
-git clone https://github.com/gmarm/IndianModelEval
+git clone https://github.com/gmarmat/IndianModelEval
 cd IndianModelEval
 
 # Install dependencies

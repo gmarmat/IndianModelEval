@@ -1,0 +1,6 @@
+model,publisher,direction,license,pairs_tested,viable_pairs,viability_pct,key_mean_chrF_pp,notes
+NLLB-200-distilled-600M,Meta,bidirectional,CC-BY-NC-4.0,182,148,81,43.4,"Mean 43.4 chrF++ on the 90 Indic-Indic pairs (88% viable on that slice). Model card itself says 'not released for production deployment.'"
+IndicTrans2 (Indic to English),AI4Bharat,Indic→En,MIT,22,19,86,,"Highest of any model tested on Indic→English. Production-ready."
+IndicTrans2 (English to Indic),AI4Bharat,En→Indic,MIT,22,13,59,,"Strong on top-resource (Hindi, Tamil, Bengali, Marathi); drops sharply on the long tail."
+Krutrim Translate,Krutrim AI Labs,English↔Indic (no Indic↔Indic),Krutrim Community License,18,18,100,54.6,"Mean ~55 chrF++ congruent with vendor's published ~52 on IN22-gen. Vendor's claim is latency-focused ('4X faster than IndicTrans2 distilled'), not quality."
+Sarvam-Translate,Sarvam AI,bidirectional (English-pivot only in practice),GPL-3.0,110,20,18,2.3,"All 20 viable pairs are English-pivot. 0 of 90 Indic-Indic pairs cleared the bar. Mean chrF++ 2.3 on Indic-Indic (model silently returns English). Documented in HF discussion #13: 'not trained for Indic to Indic translation.' Subprocess isolation required for GPL-3.0 copyleft boundary."
